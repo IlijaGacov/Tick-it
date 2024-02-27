@@ -1,5 +1,4 @@
-const apiKey = 'ACtg67XSGKBGgZ8MTJcUcoz2WvlszhBA';
-Infinitynpm
+const apiKey = 'ACtg67XSGKBGgZ8MTJcUcoz2WvlszhBA'
 const apiUrl = 'https://app.ticketmaster.com/discovery/v2/events.json';
 
 const additionalParams = {
