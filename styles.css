@@ -1,0 +1,163 @@
+/* styles.css */
+
+/* Header styles */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    color: #6caf3c;
+    background-color: #ffffff;
+    border-bottom: 10px solid #6caf3c;
+  }
+  
+  /* Logo styles */
+  .logo-container img {
+    width: 200px;
+    height: 200px;
+  }
+  
+  /* Title and Slogan styles */
+  .title-container {
+    text-align: center;
+    font-size: 40px;
+  }
+
+  .title {
+    font-size: 52px;
+    margin-bottom: 5px; 
+  }
+  
+  .slogan {
+    font-size: 30px;
+    color: black;
+    margin-top: -20px;
+  }
+
+  .auth-buttons {
+    margin-top: -180px; 
+  }
+  
+  /* Auth buttons styles */
+  .auth-buttons button {
+    padding: 10px 20px;
+    margin-left: 10px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+  }
+
+  /* Header Controls */
+  .header-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    margin-top: 2px 
+  }
+
+  .filter-button,
+  .add-event-button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+  }
+
+  .filter-button i {
+    margin-left: 8px;
+  }
+  
+  .search-bar {
+    padding: 10px;
+    margin: 0 10px; 
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    width: 1000px; 
+  }
+
+  .green-bar {
+    height: 10px;
+    background-color: #6caf3c; 
+    margin-top: 2px;
+  }
+  
+  footer {
+    background-color: #ffffff;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  /* About Us section styles */
+  .about-us {
+    max-width: 600px; 
+    margin: 0 auto; 
+  }
+  
+  .about-us h2 {
+    font-size: 24px;
+  }
+  
+  .about-us p {
+    font-size: 16px;
+    color: black;
+  }
+
+ /* Styles for each event */
+.event {
+  border: 1px solid #000000;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 20px;
+  background-color: #add67d;
+}
+
+.event h2 {
+  font-size: 35px;
+  margin-bottom: 5px;
+}
+
+/* Styles for each event */
+.event {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 10px; 
+  position: relative; 
+}
+
+/* Styles for buttons */
+
+.event .view-button {
+  padding: 10px 20px;
+  background-color: #916ea3;
+  color: white;
+  border: none;
+  border-radius:10px;
+  cursor: pointer;
+  position: absolute;
+}
+
+.event .buy-ticket-button {
+  padding: 10px 20px;
+  background-color: #a30c0c;
+  color: white;
+  border: none;
+  border-radius:10px;
+  cursor: pointer;
+  position: absolute;
+}
+
+/* View button */
+.event .view-button {
+  bottom: 50px;
+  right: 150px; 
+}
+
+/* Buy ticket button */
+.event .buy-ticket-button {
+  bottom: 50px;
+  right: 30px;
+}
