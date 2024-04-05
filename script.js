@@ -1,102 +1,101 @@
-const apiKey = 'ACtg67XSGKBGgZ8MTJcUcoz2WvlszhBA';
-const apiUrl = 'https://app.ticketmaster.com/discovery/v2/events.json';
+const ApiKey = 'ACtg67XSGKBGgZ8MTJcUcoz2WvlszhBA';
+const searchBar = document.querySelector('.search-bar'); 
 
-// Define additional parameters
-const additionalParams = {
-  size: 20
-};
-
-// Get the filter button and dropdown list elements
 const filterButton = document.querySelector('.filter-button');
 const filterDropdown = document.getElementById('filter-dropdown');
 
-// Add event listener to the filter button
 filterButton.addEventListener('click', () => {
-  console.log('Filter button clicked');
-  // Toggle visibility of the filter dropdown
-  console.log('Current display:', filterDropdown.style.display);
-  if (filterDropdown.style.display === 'none' || filterDropdown.style.display === '') {
+  if (filterDropdown.style.display === 'none') {
     filterDropdown.style.display = 'block';
-    console.log('Display set to block');
   } else {
     filterDropdown.style.display = 'none';
-    console.log('Display set to none');
   }
 });
 
-// Define global variables for filter parameters
-let category = '';
-let date = '';
-let location = '';
+// Get the Apply Filters button
+const applyFilterButton = document.getElementById('apply-filter-button');
 
-// Function to fetch events from the Ticketmaster API
-function fetchEvents(category, date, location, searchQuery) {
-  // Construct API request URL with filter parameters and search query
-  let params = { apikey: apiKey };
-  if (category) params.classificationName = category;
-  if (date) params.startDateTime = new Date(date).toISOString();
-  if (location) params.city = location;
-  if (searchQuery) params.keyword = searchQuery;
-  let url = `${apiUrl}?${new URLSearchParams(params)}`;
+// Add event listener to the Apply Filters button
+applyFilterButton.addEventListener('click', () => {
+  // Get the selected country, genre, and area from the filter dropdowns
+  const countryFilter = document.getElementById('country-filter').value;
+  const genreFilter = document.getElementById('genre-filter').value;
+  const areaFilter = document.getElementById('area-filter').value;
 
-  // Fetch events
-  fetch(url)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    })
-    .then(data => {
-      // Process the fetched events
-      displayEvents(data._embedded.events);
-    })
-    .catch(error => {
-      console.error('There was a problem with the API request:', error);
-    });
-}
+  // Log the selected country, genre, and area to the console for testing
+  console.log('Selected Country:', countryFilter);
+  console.log('Selected Genre:', genreFilter);
+  console.log('Selected Area:', areaFilter);
 
-// Function to display events
+});
+
+// Trigger click event on the Apply Filters button when the page loads
+window.addEventListener('load', () => {
+  applyFilterButton.click();
+});
+
+// Function to create and append event elements to the events container
 function displayEvents(events) {
   const eventsContainer = document.getElementById('events-container');
-  eventsContainer.innerHTML = ''; // Clear previous events
+  eventsContainer.innerHTML = ''; 
+
+  // Iterate over each event and create HTML elements to display event information
   events.forEach(event => {
     const eventDiv = document.createElement('div');
     eventDiv.classList.add('event');
     eventDiv.innerHTML = `
       <h2>${event.name}</h2>
-      <p>Date: ${event.dates.start.localDate}   Time: ${event.dates.start.localTime}, 
-      Location: ${event._embedded.venues[0].name}, ${event._embedded.venues[0].city.name}
+      <p>Date: ${event.dates.start.localDate} Time: ${event.dates.start.localTime}</p>
+      <p>Location: ${event._embedded.venues[0].name}, ${event._embedded.venues[0].city.name}</p>
       <button class="view-button" onclick="viewEvent('${event.url}')">View</button>
-      <button class="buy-ticket-button" onclick="buyTicket('${event.url}')">Buy Ticket</button></p>
+      <button class="buy-ticket-button" onclick="buyTicket('${event.url}')">Buy Ticket</button>
     `;
     eventsContainer.appendChild(eventDiv);
   });
 }
 
-// Function to handle applying the filter
-function applyFilter() {
-  // Get selected filter values
-  category = document.getElementById('category-filter').value;
-  date = document.getElementById('date-filter').value;
-  location = document.getElementById('location-filter').value;
-  const searchQuery = document.querySelector('.search-bar').value.trim();
-
-  // Update filter parameters and fetch events
-  fetchEvents(category, date, location, searchQuery);
+// Function to filter events based on the search query
+function filterEventsByName(events, searchQuery) {
+  return events.filter(event => event.name.toLowerCase().includes(searchQuery.toLowerCase()));
 }
 
-// Add event listener to apply filter button
-const applyFilterButton = document.getElementById('apply-filter-button');
-applyFilterButton.addEventListener('click', applyFilter);
+applyFilterButton.addEventListener('click', () => {
+  // Get the selected country, genre, and area from the filter dropdowns
+  const countryFilter = document.getElementById('country-filter').value;
+  const genreFilter = document.getElementById('genre-filter').value;
+  const areaFilter = document.getElementById('area-filter').value;
 
-// Get the search bar element
-const searchBar = document.querySelector('.search-bar');
+  // Log the selected country, genre, and area to the console for testing
+  console.log('Selected Country:', countryFilter);
+  console.log('Selected Genre:', genreFilter);
+  console.log('Selected Area:', areaFilter);
 
-// Add event listener to search bar input
-searchBar.addEventListener('input', () => {
-  const searchQuery = searchBar.value.trim();
-  fetchEvents(category, date, location, searchQuery);
+  // Fetch events data based on the selected country, genre, and area
+  fetch(`https://app.ticketmaster.com/discovery/v2/events.json?countryCode=${countryFilter}&classificationName=${genreFilter}&dmaId=${areaFilter}&apikey=${ApiKey}`)
+    .then((response) => response.json())
+    .then((data) => {
+      // Check if events are available
+      if (data._embedded && data._embedded.events && data._embedded.events.length > 0) {
+        // Store fetched events data
+        const eventsData = data._embedded.events;
+        // Display events on the webpage
+        displayEvents(eventsData);
+
+        // Add event listener to search bar input
+        searchBar.addEventListener('input', () => {
+          const searchQuery = searchBar.value.trim();
+          // Filter events by name
+          const filteredEvents = filterEventsByName(eventsData, searchQuery);
+          // Display filtered events
+          displayEvents(filteredEvents);
+        });
+      } else {
+        console.log('No events found.');
+      }
+    })
+    .catch((error) => {
+      console.error('There was a problem fetching data:', error);
+    });
 });
 
 // Function to handle view button click

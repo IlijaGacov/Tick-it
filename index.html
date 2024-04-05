@@ -26,31 +26,83 @@
   <div class="header-controls">
     <button class="filter-button"> Filters <i class="fas fa-filter"></i> </button>
     <input type="text" placeholder="Search Events..." class="search-bar">
-    <button class="add-event-button">Create Event</button>
+    <button class="add-event-button">Create Event (Comming soon)</button>
   </div>
 
    <!-- Filter dropdowns -->
    <div id="filter-dropdown" style="display: none;">
-    <select id="category-filter">
-      <option value="">Select Category</option>
-      <!-- Add categories here -->
+    <label for="country-filter">Country:</label>
+    <select id="country-filter">
+      <option value="">No Preference</option>
+      <option value="IE" selected>Ireland</option>
+      <option value="US">USA</option>
+      <option value="GB">UK</option>
+      <option value="CA">Canada</option>
+      <option value="AU">Australia</option>
+    </select>
+
+    <label for="genre-filter">Genre:</label>
+    <select id="genre-filter">
+      <option value="">No Preference</option>
       <option value="music">Music</option>
       <option value="sports">Sports</option>
       <option value="arts-theatre">Arts & Theatre</option>
+      <option value="festival">Festivals</option>
     </select>
-    <select id="date-filter">
-      <option value="">Select Date</option>
-      <!-- Add date options here -->
-      <option value="today">Today</option>
-      <option value="tomorrow">Tomorrow</option>
-      <option value="this-week">This Week</option>
-    </select>
-    <select id="location-filter">
-      <option value="">Select Location</option>
-      <!-- Add location options here -->
-      <option value="pheonix">Pheonix</option>
-      <option value="london">London</option>
-      <option value="new-york">New York</option>
+
+    <label for="area-filter">Popular Regions:</label>
+    <select id="area-filter">
+      <option value="">No Preference</option>
+      <optgroup label="Ireland">
+        <option value="608">All of Ireland</option>
+      </optgroup>
+      <optgroup label="Australia">
+        <option value="701">All of Australia</option>
+        <option value="702">New South Wales</option>
+        <option value="703">Queensland</option>
+        <option value="704">Western Australia</option>
+        <option value="705">Victoria/Tasmania</option>
+      </optgroup>
+      <optgroup label="Canada">
+        <option value="500">All of Canada</option>
+        <option value="502">Belleville-Peterborough</option>
+        <option value="506">Edmonton</option>
+        <option value="514">New Brunswick</option>
+        <option value="515">Northern Ontario</option>
+        <option value="519">Ottawa-Gatineau</option>
+        <option value="522">Montreal</option>
+        <option value="527">Toronto</option>
+        <option value="528">Vancouver</option>
+        <option value="530">Winnipeg-Brandon</option>
+      </optgroup>
+      <optgroup label="UK">
+        <option value="601">All of United Kingdom</option>
+        <option value="602">London</option>
+        <option value="603">South UK</option>
+        <option value="604">Midlands and Central UK</option>
+        <option value="605">Wales and North West UK</option>
+        <option value="606">North and North East UK</option>
+        <option value="607">Scotland</option>
+      </optgroup>
+      <optgroup label="USA">
+        <option value="200">All of US</option>
+        <option value="220">Atlanta</option>
+        <option value="222">Austin</option>
+        <option value="249">Chicago</option>
+        <option value="264">Denver</option>
+        <option value="266">Detroit</option>
+        <option value="299">Honolulu</option>
+        <option value="300">Houston</option>
+        <option value="303">Indianapolis</option>
+        <option value="319">Las Vegas</option>
+        <option value="324">Los Angeles</option>
+        <option value="358">Philadelphia</option>
+        <option value="359">Phoenix</option>
+        <option value="381">San Diego</option>
+        <option value="382">San Francisco</option>
+        <option value="385">Seattle</option>
+        <option value="409">Washington DC</option>
+      </optgroup>
     </select>
     <button id="apply-filter-button">Apply Filters</button>
   </div>
@@ -61,7 +113,7 @@
     <div id="events-container"></div>
   </body>
 
-  <script src="script2.js"></script>
+  <script src="script.js"></script>
 
   <div class="green-bar"></div>
   <footer>
