@@ -27,12 +27,43 @@ applyFilterButton.addEventListener('click', () => {
   console.log('Selected Genre:', genreFilter);
   console.log('Selected Area:', areaFilter);
 
+  // Fetch events data based on the selected country, genre, and area
+  fetchEvents(countryFilter, genreFilter, areaFilter);
 });
 
 // Trigger click event on the Apply Filters button when the page loads
 window.addEventListener('load', () => {
   applyFilterButton.click();
 });
+
+// Function to fetch events data based on the selected country, genre, and area
+function fetchEvents(country, genre, area) {
+  fetch(`https://app.ticketmaster.com/discovery/v2/events.json?countryCode=${country}&classificationName=${genre}&dmaId=${area}&apikey=${ApiKey}`)
+    .then((response) => response.json())
+    .then((data) => {
+      // Check if events are available
+      if (data._embedded && data._embedded.events && data._embedded.events.length > 0) {
+        // Store fetched events data
+        const eventsData = data._embedded.events;
+        // Display events on the webpage
+        displayEvents(eventsData);
+
+        // Add event listener to search bar input
+        searchBar.addEventListener('input', () => {
+          const searchQuery = searchBar.value.trim();
+          // Filter events by name and location
+          const filteredEvents = filterEvents(eventsData, searchQuery);
+          // Display filtered events
+          displayEvents(filteredEvents);
+        });
+      } else {
+        console.log('No events found.');
+      }
+    })
+    .catch((error) => {
+      console.error('There was a problem fetching data:', error);
+    });
+}
 
 // Function to create and append event elements to the events container
 function displayEvents(events) {
@@ -55,48 +86,15 @@ function displayEvents(events) {
 }
 
 // Function to filter events based on the search query
-function filterEventsByName(events, searchQuery) {
-  return events.filter(event => event.name.toLowerCase().includes(searchQuery.toLowerCase()));
+function filterEvents(events, searchQuery) {
+  return events.filter(event => {
+    // Check if event name or location matches the search query
+    const eventName = event.name.toLowerCase();
+    const venueName = event._embedded.venues[0].name.toLowerCase();
+    const city = event._embedded.venues[0].city.name.toLowerCase();
+    return eventName.includes(searchQuery.toLowerCase()) || venueName.includes(searchQuery.toLowerCase()) || city.includes(searchQuery.toLowerCase());
+  });
 }
-
-applyFilterButton.addEventListener('click', () => {
-  // Get the selected country, genre, and area from the filter dropdowns
-  const countryFilter = document.getElementById('country-filter').value;
-  const genreFilter = document.getElementById('genre-filter').value;
-  const areaFilter = document.getElementById('area-filter').value;
-
-  // Log the selected country, genre, and area to the console for testing
-  console.log('Selected Country:', countryFilter);
-  console.log('Selected Genre:', genreFilter);
-  console.log('Selected Area:', areaFilter);
-
-  // Fetch events data based on the selected country, genre, and area
-  fetch(`https://app.ticketmaster.com/discovery/v2/events.json?countryCode=${countryFilter}&classificationName=${genreFilter}&dmaId=${areaFilter}&apikey=${ApiKey}`)
-    .then((response) => response.json())
-    .then((data) => {
-      // Check if events are available
-      if (data._embedded && data._embedded.events && data._embedded.events.length > 0) {
-        // Store fetched events data
-        const eventsData = data._embedded.events;
-        // Display events on the webpage
-        displayEvents(eventsData);
-
-        // Add event listener to search bar input
-        searchBar.addEventListener('input', () => {
-          const searchQuery = searchBar.value.trim();
-          // Filter events by name
-          const filteredEvents = filterEventsByName(eventsData, searchQuery);
-          // Display filtered events
-          displayEvents(filteredEvents);
-        });
-      } else {
-        console.log('No events found.');
-      }
-    })
-    .catch((error) => {
-      console.error('There was a problem fetching data:', error);
-    });
-});
 
 // Function to handle view button click
 function viewEvent(url) {
