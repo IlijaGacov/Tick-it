@@ -105,3 +105,15 @@ function viewEvent(url) {
 function buyTicket(url) {
   window.open(url, '_blank');
 }
+
+const signupButton = document.querySelector('.signup-button');
+
+signupButton.addEventListener('click', () => {
+  window.location.href = 'signup.html';
+});
+
+const loginButton = document.querySelector('.login-button');
+
+loginButton.addEventListener('click', () => {
+  window.location.href = 'login.html';
+});

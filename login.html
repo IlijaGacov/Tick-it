@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <div class="logo-container">
+      <img src="images/logo.png" alt="Tick-It Events Logo">
+    </div>
+
+    <div class="title-container">
+      <h1>Tick-It</h1>
+      <p class="slogan">Tick it off your list today!</p>
+    </div>
+    <div class="auth-buttons2">
+      <button>Login</button>
+      <button>Signup</button>
+    </div>
+  </header>
+
+  <div class="login-container">
+    <h2>Login to Tick-It</h2>
+    <form id="login-form">
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email">
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password">
+      </div>
+      <div class="form-group">
+        <label for="pin">Pin (4 digits):</label>
+        <input type="password" id="pin" name="pin">
+      </div>
+      <button type="submit">Login</button>
+    </form>
+    <p>Don't have an account? <a href="signup.html">Sign up</a></p>
+  </div>
+  <div class="green-bar"></div>
+  <footer>
+    <div class="about-us">
+      <h2>About Us</h2>
+      <p>Final Year Project for Applied Computing SETU <br>
+        For more information email: ile.gacov@gmail.com
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('login-form').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent the form from submitting
+
+      // Get user input
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const pin = document.getElementById('pin').value;
+
+      // Retrieve user data from localStorage
+      const storedData = localStorage.getItem('userData');
+      if (storedData) {
+        // Parse stored data from JSON
+        const userData = JSON.parse(storedData);
+
+        // Check if email and password match stored data
+        if (userData.email === email && userData.password === password) {
+          // Authentication successful, display success message
+          alert('Login successful.');
+
+          setTimeout(function() {
+            window.location.href = 'index.html';
+          }, 500);
+        } else {
+          // Authentication failed, display error message
+          alert('Invalid email or password or pin. Please try again.');
+        }
+      } else {
+        // No user data found, display error message
+        alert('No user found. Please sign up.');
+      }
+    });
+  </script>
+
+</body>
+</html>

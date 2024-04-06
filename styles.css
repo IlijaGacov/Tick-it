@@ -48,6 +48,20 @@ header {
     cursor: pointer;
   }
 
+  .auth-buttons2 {
+    margin-top: -180px; 
+  }
+  
+  /* Auth buttons styles */
+  .auth-buttons2 button {
+    padding: 10px 20px;
+    margin-left: 10px;
+    border: none;
+    background-color: white;
+    color: white;
+    cursor: pointer;
+  }
+
   /* Header Controls */
   .header-controls {
     display: flex;
@@ -174,4 +188,45 @@ header {
   margin: 4px 2px;
   cursor: pointer;
   border-radius: 8px;
+}
+
+.signup-container {
+  margin: 0 auto; 
+  width: 300px;
+  text-align: center; 
+}
+
+.signup-form {
+  margin-top: 20px;
+}
+
+.login-container {
+  margin: 0 auto; 
+  width: 300px;
+  text-align: center; 
+}
+
+.login-form {
+  margin-top: 20px;
+}
+
+.form-group {
+  margin-bottom: 10px; 
+}
+
+label {
+  display: block; 
+}
+
+input[type="email"],
+input[type="password"],
+input[type="pin"] {
+  width: 100%;
+  padding: 5px; 
+  box-sizing: border-box;
+}
+
+button[type="submit"] {
+  width: 100%; 
+  padding: 10px;
 }
