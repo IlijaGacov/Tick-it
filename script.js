@@ -78,7 +78,7 @@ function displayEvents(events) {
       <h2>${event.name}</h2>
       <p>Date: ${event.dates.start.localDate} Time: ${event.dates.start.localTime}</p>
       <p>Location: ${event._embedded.venues[0].name}, ${event._embedded.venues[0].city.name}</p>
-      <button class="view-button" onclick="viewEvent('${event.url}')">View</button>
+      <button class="view-button" onclick="viewEvent('${event.name}', '${event._embedded.venues[0].name + ', ' + event._embedded.venues[0].city.name}')">View</button>
       <button class="buy-ticket-button" onclick="buyTicket('${event.url}')">Buy Ticket</button>
     `;
     eventsContainer.appendChild(eventDiv);
@@ -96,10 +96,21 @@ function filterEvents(events, searchQuery) {
   });
 }
 
-// Function to handle view button click
-function viewEvent(url) {
-  window.open(url, '_blank');
+// Define the viewEvent function to navigate to the event page
+function viewEvent(eventName, eventLocation) {
+  // Encode the event name and location to include in the URL
+  const encodedEventName = encodeURIComponent(eventName);
+  const encodedEventLocation = encodeURIComponent(eventLocation);
+  
+  // Construct the URL with query parameters for event name and location
+  const url = `eventpage.html?eventName=${encodedEventName}&eventLocation=${encodedEventLocation}`;
+  
+  // Navigate to the event page
+  window.location.href = url;
 }
+
+
+
 
 // Function to handle buy ticket button click
 function buyTicket(url) {
