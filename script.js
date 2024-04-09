@@ -70,19 +70,19 @@ function displayEvents(events) {
   const eventsContainer = document.getElementById('events-container');
   eventsContainer.innerHTML = ''; 
 
-  // Iterate over each event and create HTML elements to display event information
-  events.forEach(event => {
-    const eventDiv = document.createElement('div');
-    eventDiv.classList.add('event');
-    eventDiv.innerHTML = `
-      <h2>${event.name}</h2>
-      <p>Date: ${event.dates.start.localDate} Time: ${event.dates.start.localTime}</p>
-      <p>Location: ${event._embedded.venues[0].name}, ${event._embedded.venues[0].city.name}</p>
-      <button class="view-button" onclick="viewEvent('${event.name}', '${event._embedded.venues[0].name + ', ' + event._embedded.venues[0].city.name}')">View</button>
-      <button class="buy-ticket-button" onclick="buyTicket('${event.url}')">Buy Ticket</button>
-    `;
-    eventsContainer.appendChild(eventDiv);
-  });
+// Iterate over each event and create HTML elements to display event information
+events.forEach(event => {
+  const eventDiv = document.createElement('div');
+  eventDiv.classList.add('event');
+  eventDiv.innerHTML = `
+    <h2>${event.name}</h2>
+    <p>Date: ${event.dates.start.localDate} Time: ${event.dates.start.localTime}</p>
+    <p>Location: ${event._embedded.venues[0].name}, ${event._embedded.venues[0].city.name}</p>
+    <button class="view-button" onclick="viewEvent('${event.name}', '${event._embedded.venues[0].name + ', ' + event._embedded.venues[0].city.name}', '${event.dates.start.localDate || ''}', '${event.dates.start.localTime || ''}', '${event._embedded.attractions && event._embedded.attractions.length > 0 ? event._embedded.attractions[0].name : 'Unknown Performer'}')">View</button>
+    <button class="buy-ticket-button" onclick="buyTicket('${event.url}')">Buy Ticket</button>
+  `;
+  eventsContainer.appendChild(eventDiv);
+});
 }
 
 // Function to filter events based on the search query
@@ -96,14 +96,16 @@ function filterEvents(events, searchQuery) {
   });
 }
 
-// Define the viewEvent function to navigate to the event page
-function viewEvent(eventName, eventLocation) {
-  // Encode the event name and location to include in the URL
+function viewEvent(eventName, eventLocation, eventDate, eventTime, performer) {
+  // Encode the event name, location, date, time, and performer to include in the URL
   const encodedEventName = encodeURIComponent(eventName);
   const encodedEventLocation = encodeURIComponent(eventLocation);
+  const encodedEventDate = encodeURIComponent(eventDate);
+  const encodedEventTime = encodeURIComponent(eventTime);
+  const encodedPerformer = encodeURIComponent(performer);
   
-  // Construct the URL with query parameters for event name and location
-  const url = `eventpage.html?eventName=${encodedEventName}&eventLocation=${encodedEventLocation}`;
+  // Construct the URL with query parameters for event details
+  const url = `eventpage.html?eventName=${encodedEventName}&eventLocation=${encodedEventLocation}&eventDate=${encodedEventDate}&eventTime=${encodedEventTime}&performer=${encodedPerformer}`;
   
   // Navigate to the event page
   window.location.href = url;
