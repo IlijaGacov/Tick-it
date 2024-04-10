@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <div class="logo-container">
+      <img src="images/logo.png" alt="Tick-It Events Logo">
+    </div>
+
+    <div class="title-container">
+      <h1>Tick-It</h1>
+      <p class="slogan">Tick it off your list today!</p>
+    </div>
+    <div class="auth-buttons2">
+      <button>Login</button>
+      <button>Signup</button>
+    </div>
+  </header>
+  <div class="payment-container">
+    <div class="payment-details">
+      <h2>Payment Details</h2>
+      <input type="text" placeholder="Cardholder Name">
+      <input type="text" placeholder="Card Number">
+      <input type="text" placeholder="Expiry Date">
+      <input type="number" placeholder="CVV">
+      <button id="submit-payment">Buy Now</button>
+    </div>
+  </div>
+  
+  <br><br><br>
+  <div class="green-bar"></div>
+  <footer>
+    <div class="about-us">
+      <h2>About Us</h2>
+      <p>Final Year Project for Applied Computing SETU <br>
+        For more information email: ile.gacov@gmail.com
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+     const submitPaymentButton = document.getElementById('submit-payment');
+       if (submitPaymentButton) {
+        submitPaymentButton.addEventListener('click', function() {
+      alert('You Purchased the ticket');
+      setTimeout(function() {
+        window.location.href = 'index.html';
+      }, 500); 
+    });
+    }
+  });
+  </script>

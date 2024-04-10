@@ -96,7 +96,7 @@ function filterEvents(events, searchQuery) {
   });
 }
 
-function viewEvent(eventName, eventLocation, eventDate, eventTime, performer) {
+function viewEvent(eventName, eventLocation, eventDate, eventTime, eventDescription) {
   // Encode the event name, location, date, time, and performer to include in the URL
   const encodedEventName = encodeURIComponent(eventName);
   const encodedEventLocation = encodeURIComponent(eventLocation);
@@ -111,12 +111,10 @@ function viewEvent(eventName, eventLocation, eventDate, eventTime, performer) {
   window.location.href = url;
 }
 
-
-
-
 // Function to handle buy ticket button click
 function buyTicket(url) {
-  window.open(url, '_blank');
+  //window.open(url, '_blank'); (OLD, links to ticketmaster buy page)
+  window.location.href = 'buypage.html';
 }
 
 const signupButton = document.querySelector('.signup-button');
