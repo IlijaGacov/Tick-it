@@ -102,10 +102,10 @@ function viewEvent(eventName, eventLocation, eventDate, eventTime, performer) {
   const encodedEventLocation = encodeURIComponent(eventLocation);
   const encodedEventDate = encodeURIComponent(eventDate);
   const encodedEventTime = encodeURIComponent(eventTime);
-  const encodedPerformer = encodeURIComponent(performer);
+  const encodedEventDescription = encodeURIComponent(eventDescription); 
   
   // Construct the URL with query parameters for event details
-  const url = `eventpage.html?eventName=${encodedEventName}&eventLocation=${encodedEventLocation}&eventDate=${encodedEventDate}&eventTime=${encodedEventTime}&performer=${encodedPerformer}`;
+  const url = `eventpage.html?eventName=${encodedEventName}&eventLocation=${encodedEventLocation}&eventDate=${encodedEventDate}&eventTime=${encodedEventTime}&eventDescription=${encodedEventDescription}`;
   
   // Navigate to the event page
   window.location.href = url;
