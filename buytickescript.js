@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', function() {
 }
 });
 
-
 function viewTicketCount() {
-    window.open('https://wrnaq4sr55.execute-api.us-east-1.amazonaws.com/stage1/getTicketCount', '_blank');
+    window.open('https://qwl6xfpdgbw3ziedvwk5hwpnna0aiiah.lambda-url.us-east-1.on.aws/');
 }
