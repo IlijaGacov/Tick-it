@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login</title>
+  <title>Buy Ticket</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -22,6 +22,7 @@
       <button>Signup</button>
     </div>
   </header>
+  <div class="ticket-count">Number Tickets Available: <button onclick="viewTicketCount()">View</button></div>
   <div class="payment-container">
     <div class="payment-details">
       <h2>Payment Details</h2>
@@ -44,16 +45,4 @@
     </div>
   </footer>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-     const submitPaymentButton = document.getElementById('submit-payment');
-       if (submitPaymentButton) {
-        submitPaymentButton.addEventListener('click', function() {
-      alert('You Purchased the ticket');
-      setTimeout(function() {
-        window.location.href = 'index.html';
-      }, 500); 
-    });
-    }
-  });
-  </script>
+  <script src="buytickescript.js"></script>

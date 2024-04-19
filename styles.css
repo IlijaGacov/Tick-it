@@ -235,7 +235,7 @@ button[type="submit"] {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 50px;
+  margin-top: 5px;
 }
 
 .payment-details {
@@ -266,4 +266,8 @@ button[type="submit"] {
 
 .payment-details button:hover {
   background-color: #0056b3;
+}
+.ticket-count {
+  text-align: center;
+  padding: 15px;
 }
